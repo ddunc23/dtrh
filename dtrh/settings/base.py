@@ -11,9 +11,10 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from unipath import Path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).ancestor(3)
 
 # Application definition
 
@@ -111,13 +112,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = BASE_DIR.child('static')
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR.child('media')
 
 MEDIA_URL = '/media/'
 
-LOG_DIR = os.path.join(BASE_DIR, 'logs')
+LOG_DIR = BASE_DIR.child('logs')
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 

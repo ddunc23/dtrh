@@ -120,3 +120,22 @@ MEDIA_URL = '/media/'
 LOG_DIR = os.path.join(BASE_DIR, 'logs')
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': LOG_DIR + '/debug.log',
+        },
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}

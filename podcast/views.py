@@ -67,9 +67,9 @@ class iTunesPodcastsFeedGenerator(Rss201rev2Feed):
 
 	def add_item_elements(self,  handler, item):
 		super(iTunesPodcastsFeedGenerator, self).add_item_elements(handler, item)
-		handler.addQuickElement(u'iTunes:summary',item['summary'])
-		handler.addQuickElement(u'iTunes:duration',item['duration'])
-		handler.addQuickElement(u'iTunes:explicit',item['explicit'])
+		handler.addQuickElement(u'itunes:summary',item['summary'])
+		handler.addQuickElement(u'itunes:duration',item['duration'])
+		handler.addQuickElement(u'itunes:explicit',item['explicit'])
 
 
 #class iTunesPodcastPost(request, id):
@@ -133,7 +133,7 @@ class iTunesPodcastsFeed(Feed):
 		return item.date_broadcast
 
 	def item_enclosure_url(self, item):
-		return 'http://46.101.42.37:8000/static/' + str(item.file)
+		return 'http://46.101.42.37:8000/media/' + str(item.file)
 
 	def item_enclosure_length(self, item):
 		return 1200

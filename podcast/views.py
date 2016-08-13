@@ -123,7 +123,7 @@ class iTunesPodcastsFeed(Feed):
 		extra['iTunes_email'] = self.iTunes_email
 		extra['iTunes_image_url'] = self.iTunes_image_url
 		extra['iTunes_explicit'] = self.iTunes_explicit
-		extra['iTunes_category'] = 'Literature'
+		extra['iTunes_category'] = 'Arts'
 		return extra
 
 	def item_extra_kwargs(self, item):

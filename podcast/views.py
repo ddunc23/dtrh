@@ -123,7 +123,7 @@ class iTunesPodcastsFeed(Feed):
 		extra['iTunes_email'] = self.iTunes_email
 		extra['iTunes_image_url'] = self.iTunes_image_url
 		extra['iTunes_explicit'] = self.iTunes_explicit
-		extra['iTunes_category'] = '"Books"'
+		extra['iTunes_category'] = 'Literature'
 		return extra
 
 	def item_extra_kwargs(self, item):
@@ -133,7 +133,7 @@ class iTunesPodcastsFeed(Feed):
 		return item.date_broadcast
 
 	def item_enclosure_url(self, item):
-		return '/static/' + str(item.file)
+		return 'http://46.101.42.37:8000/static/' + str(item.file)
 
 	def item_enclosure_length(self, item):
 		return 1200

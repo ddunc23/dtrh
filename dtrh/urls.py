@@ -23,3 +23,6 @@ urlpatterns = [
     url(r'^episodes/', include('podcast.urls')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -97,18 +97,18 @@ class iTunesPodcastsFeed(Feed):
 	"""
 	A feed of podcasts for iTunes and other compatible podcatchers.
 	"""
-	title = "iTunes Podcast"
-	link = "/podcasts/iTunes/"
-	author_name = 'The Great Author'
-	description = "A Podcast of great things."
-	subtitle = "From now until forever"
-	summary = "People get around and chat about stuff. You listen."
-	iTunes_name = u'author Name'
-	iTunes_email = u'katherine@katherinewoodfine.com'
+	title = 'Down the Rabbit Hole Radio'
+	link = 'http://dtrhradio.com'
+	author_name = 'Down the Rabbit Hole'
+	description = 'A Radio Show about Children\'s Books'
+	subtitle = ''
+	summary = 'Things about Children\'s books'
+	iTunes_name = u'Down the Rabbit Hole'
+	iTunes_email = u'downtherabbitholeradio@gmail.com'
 	iTunes_image_url = u'http://example.com/url/of/image'
 	iTunes_explicit = u'no'
 	feed_type = iTunesPodcastsFeedGenerator
-	feed_copyright = "Copyright %s by the The Author." % datetime.date.today().year
+	feed_copyright = 'Copyright %s Down the Rabbit Hole' % datetime.date.today().year
 
 	def items(self):
 		"""

@@ -62,8 +62,8 @@ class iTunesPodcastsFeedGenerator(Rss201rev2Feed):
 		handler.addQuickElement(u'itunes:name', self.feed['iTunes_name'])
 		handler.addQuickElement(u'itunes:email', self.feed['iTunes_email'])
 		handler.endElement(u"itunes:owner")
-		handler.addQuickElement(u'itunes:image href=', self.feed['iTunes_image_url'])
-		handler.addQuickElement(u'itunes:category text=', self.feed['iTunes_category'])
+		handler.addQuickElement(u'itunes:image', attrs={'href': self.feed['iTunes_image_url']})
+		handler.addQuickElement(u'itunes:category', attrs={'text': self.feed['iTunes_category']})
 
 	def add_item_elements(self,  handler, item):
 		super(iTunesPodcastsFeedGenerator, self).add_item_elements(handler, item)
@@ -105,7 +105,7 @@ class iTunesPodcastsFeed(Feed):
 	summary = "People get around and chat about stuff. You listen."
 	iTunes_name = u'author Name'
 	iTunes_email = u'katherine@katherinewoodfine.com'
-	iTunes_image_url = u'"http://example.com/url/of/image"'
+	iTunes_image_url = u'http://example.com/url/of/image'
 	iTunes_explicit = u'no'
 	feed_type = iTunesPodcastsFeedGenerator
 	feed_copyright = "Copyright %s by the The Author." % datetime.date.today().year

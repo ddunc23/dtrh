@@ -133,7 +133,7 @@ class iTunesPodcastsFeed(Feed):
 		return item.date_broadcast
 
 	def item_enclosure_url(self, item):
-		return 'http://dtrhradio/media/' + str(item.file)
+		return 'http://dtrhradio.com/media/' + str(item.file)
 
 	def item_enclosure_length(self, item):
 		return 1200

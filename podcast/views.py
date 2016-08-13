@@ -63,6 +63,7 @@ class iTunesPodcastsFeedGenerator(Rss201rev2Feed):
 		handler.addQuickElement(u'itunes:email', self.feed['iTunes_email'])
 		handler.endElement(u"itunes:owner")
 		handler.addQuickElement(u'itunes:image', self.feed['iTunes_image_url'])
+		handler.addQuickElement(u'itunes:category', self.feed['iTunes_category'])
 
 	def add_item_elements(self,  handler, item):
 		super(iTunesPodcastsFeedGenerator, self).add_item_elements(handler, item)
@@ -101,9 +102,9 @@ class iTunesPodcastsFeed(Feed):
 	author_name = 'The Great Author'
 	description = "A Podcast of great things."
 	subtitle = "From now until forever"
-	summary = "People get around and chat about stuff.  You listen."
+	summary = "People get around and chat about stuff. You listen."
 	iTunes_name = u'author Name'
-	iTunes_email = u'[email protected]'
+	iTunes_email = u'katherine@katherinewoodfine.com'
 	iTunes_image_url = u'http://example.com/url/of/image'
 	iTunes_explicit = u'no'
 	feed_type = iTunesPodcastsFeedGenerator
@@ -122,6 +123,7 @@ class iTunesPodcastsFeed(Feed):
 		extra['iTunes_email'] = self.iTunes_email
 		extra['iTunes_image_url'] = self.iTunes_image_url
 		extra['iTunes_explicit'] = self.iTunes_explicit
+		extra['iTunes_category'] = 'category'
 		return extra
 
 	def item_extra_kwargs(self, item):

@@ -12,6 +12,40 @@ def podcast_directory_path(instance, filename):
 	return 'uploads/podcasts/{0}/{1}'.format(instance.date_broadcast, filename)
 
 
+class SingletonModel(models.Model):
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        self.__class__.objects.exclude(id=self.id).delete()
+        super(SingletonModel, self).save(*args, **kwargs)
+
+    @classmethod
+    def load(cls):
+        try:
+            return cls.objects.get()
+        except cls.DoesNotExist:
+            return cls()
+
+
+class Podcast(SingletonModel):
+	"""Global settings for the DTRH podcast"""
+	title = models.CharField(max_length=140)
+	link = models.CharField(max_length=140)
+	author_name = models.CharField(max_length=140)
+	description = models.TextField()
+	summary = models.CharField(max_length=140)
+	iTunes_name = models.CharField(max_length=140)
+	iTunes_email = models.CharField(max_length=140)
+
+	class Meta:
+		verbose_name = 'Podcast Settings'
+		verbose_name_plural = 'Podcast Settings'
+
+	def __unicode__(self):
+		return self.title
+
+
 class Episode(models.Model):
 	"""An Epsiode of the DTRH podcast and associated gubbins"""
 	title = models.CharField(max_length=128)

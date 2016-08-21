@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.syndication.views import Feed
 from django.utils.feedgenerator import Rss201rev2Feed
-from models import Episode
+from models import Episode, Podcast
 import datetime
 
 def episode(request, year, month, slug):
@@ -9,42 +9,6 @@ def episode(request, year, month, slug):
 
 	return render(request, 'podcast/episode.html', {'episode': episode})
 
-
-# Feed
-
-class LatestEpisodesFeed(Feed):
-	title = 'Down the Rabbit Hole Radio'
-	link = '/feed/'
-	description = 'Down the Rabbit Hole Radio is reet good'
-
-	def items(self):
-		return Episode.objects.order_by('-date_broadcast')[:5]
-
-	def item_title(self, item):
-		return item.title
-
-	def item_description(self, item):
-		return item.description
-
-	#def item_enclosures(self, item):
-	#	item.url = '/static/' + str(item.file)
-	#	item.length = 32000
-	#	item.mime_type = 'audio/mpeg'
-		# copyright = '&copy; Down the Rabit Hole Radio 2016'
-	#	return [item]
-
-	def item_enclosure_url(self, item):
-		url = '/static/' + str(item.file)
-
-	def item_enclosure_length(self, item):
-		return 32000
-
-	item_enclosure_mime_type = "audio/mpeg"
-
-	feed_copyright = '&copy; Down the Rabit Hole Radio ' + str(datetime.date.today().year)
-
-	def item_pubdate(self, item):
-		return item.date_broadcast
 
 
 class iTunesPodcastsFeedGenerator(Rss201rev2Feed):
@@ -72,39 +36,19 @@ class iTunesPodcastsFeedGenerator(Rss201rev2Feed):
 		handler.addQuickElement(u'itunes:explicit',item['explicit'])
 
 
-#class iTunesPodcastPost(request, id):
-#	podcast = get_object_or_404(Episode, id=id)
-#
-#	def __init__(self, podcast):
-#		self.id = podcast.id
-#		self.date_broadcast = podcast.date_broadcast
-#		self.title = podcast.title
-#		self.summary = podcast.description
-#		self.enclosure_url = podcast.file.url
-#		self.enclosure_length = podcast.file.size
-#		self.enclosure_mime_type = u'audio/mpeg'
-#		self.duration = '10'
-#		self.explicit = u'no'
-#
-#	def __unicode__(self):
-#		return "Podcast: %s" % self.title
-#
-#	def get_absolute_url(self):
-#		return ('itunes_episode', [str(self.id)])
-
-
 class iTunesPodcastsFeed(Feed):
 	"""
 	A feed of podcasts for iTunes and other compatible podcatchers.
 	"""
-	title = 'Down the Rabbit Hole Radio'
-	link = 'http://dtrhradio.com'
-	author_name = 'Down the Rabbit Hole'
-	description = 'A Radio Show about Children\'s Books'
+	settings = Podcast.objects.all()[0]
+	title = settings.title
+	link = settings.link
+	author_name = settings.author_name
+	description = settings.description
 	subtitle = ''
-	summary = 'Things about Children\'s books'
-	iTunes_name = u'Down the Rabbit Hole'
-	iTunes_email = u'downtherabbitholeradio@gmail.com'
+	summary = settings.summary
+	iTunes_name = settings.iTunes_name
+	iTunes_email = settings.iTunes_email
 	iTunes_image_url = u'http://example.com/url/of/image'
 	iTunes_explicit = u'no'
 	feed_type = iTunesPodcastsFeedGenerator

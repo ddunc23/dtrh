@@ -78,7 +78,7 @@ class iTunesPodcastsFeed(Feed):
 		"""
 		Returns a list of items to publish in this feed.
 		"""
-		return Episode.objects.order_by('-date_broadcast').exclude(file=None)
+		return Episode.objects.order_by('-date_broadcast').exclude(file='')
 
 
 	def feed_extra_kwargs(self, obj):

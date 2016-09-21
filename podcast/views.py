@@ -75,7 +75,7 @@ class iTunesPodcastsFeed(Feed):
 		return extra
 
 	def audio_duration(self, item):
-		audio = MP3('media/' + str(item.file))
+		audio = MP3(settings.MEDIA_ROOT + '/' + str(item.file))
 		m, s = divmod(audio.info.length, 60)
 		h, m = divmod(m, 60)
 		return '%d:%02d:%02d' % (h, m, s)

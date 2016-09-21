@@ -3,6 +3,8 @@ from django.contrib.syndication.views import Feed
 from django.utils.feedgenerator import Rss201rev2Feed
 from models import Episode, Podcast
 import datetime
+from mutagen.mp3 import MP3
+import os
 
 def episode(request, year, month, slug):
 	episode = get_object_or_404(Episode, slug=slug, date_broadcast__year=year, date_broadcast__month=month)
@@ -49,7 +51,7 @@ class iTunesPodcastsFeed(Feed):
 	summary = settings.summary
 	iTunes_name = settings.iTunes_name
 	iTunes_email = settings.iTunes_email
-	iTunes_image_url = u'http://example.com/url/of/image'
+	iTunes_image_url = u'http://dtrhradio.com/static/dtrh/img/dtrh_logo.jpg'
 	iTunes_explicit = u'no'
 	feed_type = iTunesPodcastsFeedGenerator
 	feed_copyright = 'Copyright %s Down the Rabbit Hole' % datetime.date.today().year
@@ -70,8 +72,14 @@ class iTunesPodcastsFeed(Feed):
 		extra['iTunes_category'] = 'Arts'
 		return extra
 
+	def audio_duration(self, item):
+		audio = MP3('media/' + str(item.file))
+		m, s = divmod(audio.info.length, 60)
+		h, m = divmod(m, 60)
+		return '%d:%02d:%02d' % (h, m, s)
+
 	def item_extra_kwargs(self, item):
-		return {'summary': item.description, 'duration': '1200', 'explicit': 'no'}
+		return {'summary': item.description, 'duration': self.audio_duration(item), 'explicit': 'no'}
 
 	def item_pubdate(self, item):
 		return item.date_broadcast
@@ -80,7 +88,8 @@ class iTunesPodcastsFeed(Feed):
 		return 'http://dtrhradio.com/media/' + str(item.file)
 
 	def item_enclosure_length(self, item):
-		return 1200
+		length = os.path.getsize('media/' + str(item.file))
+		return length
 
 	def item_enclosure_mime_type(self, item):
 		return 'audio/mp3'

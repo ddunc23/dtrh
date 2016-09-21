@@ -20,6 +20,7 @@ BASE_DIR = Path(__file__).ancestor(3)
 
 INSTALLED_APPS = [
     'grappelli',
+    'filebrowser',
     'ckeditor',
     'ckeditor_uploader',
     'django.contrib.admin',

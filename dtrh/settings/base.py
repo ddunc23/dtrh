@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'taggit',
     'podcast',
+    'pages',
 ]
 
 MIDDLEWARE = [
@@ -56,6 +57,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'pages.context_processors.menu_links',
             ],
         },
     },
@@ -112,8 +114,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-
-STATIC_ROOT = BASE_DIR.child('static')
 
 MEDIA_ROOT = BASE_DIR.child('media')
 

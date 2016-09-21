@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^episodes/', include('podcast.urls')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    url(r'', include('pages.urls')),
 ]
 
 if settings.DEBUG:

@@ -56,7 +56,7 @@ class Episode(models.Model):
 	created = models.DateField(auto_now_add=True, null=True, blank=True)
 	date_broadcast = models.DateTimeField(null=True, blank=False)
 	published = models.BooleanField(default=False)
-	body = RichTextUploadingField(blank=False)
+	body = RichTextUploadingField(blank=True)
 	tags = TaggableManager(blank=True)
 	description = models.TextField(null=False, blank=False)
 
@@ -65,4 +65,4 @@ class Episode(models.Model):
 		return self.date_broadcast.strftime('%d %B %Y') + ' | ' + self.title
 
 	def get_absolute_url(self):
-		return reverse('podcast-episode', args=[str(self.date_broadcast.year), str(self.date_broadcast.month), str(self.slug)])
+		return reverse('episode', args=[str(self.date_broadcast.year), str(self.date_broadcast.month), str(self.slug)])

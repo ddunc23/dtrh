@@ -8,6 +8,22 @@ import os
 from django.conf import settings
 
 
+def episode_list(request):
+	episodes = Episode.objects.exclude(file=None)
+	paginator = Paginator(episodes, 10)
+
+	page = request.GET.get('page')
+	
+	try:
+		episodes = paginator.page(page)
+	except PageNotAnInteger:
+		episodes = paginator.page(1)
+	except EmptyPage:
+		episodes = paginator.page(paginator.num_pages)
+
+	return render(request, 'podcast/episode_list.html', {'episodes': episodes})
+
+
 def episode(request, year, month, slug):
 	episode = get_object_or_404(Episode, slug=slug, date_broadcast__year=year, date_broadcast__month=month)
 
@@ -62,7 +78,7 @@ class iTunesPodcastsFeed(Feed):
 		"""
 		Returns a list of items to publish in this feed.
 		"""
-		return Episode.objects.order_by('-date_broadcast')
+		return Episode.objects.order_by('-date_broadcast').exclude(file=None)
 
 
 	def feed_extra_kwargs(self, obj):

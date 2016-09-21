@@ -5,6 +5,8 @@ from models import Episode, Podcast
 import datetime
 from mutagen.mp3 import MP3
 import os
+from django.conf import settings
+
 
 def episode(request, year, month, slug):
 	episode = get_object_or_404(Episode, slug=slug, date_broadcast__year=year, date_broadcast__month=month)
@@ -88,7 +90,7 @@ class iTunesPodcastsFeed(Feed):
 		return 'http://dtrhradio.com/media/' + str(item.file)
 
 	def item_enclosure_length(self, item):
-		length = os.path.getsize('media/' + str(item.file))
+		length = os.path.getsize(settings.MEDIA_ROOT + '/' + str(item.file))
 		return length
 
 	def item_enclosure_mime_type(self, item):

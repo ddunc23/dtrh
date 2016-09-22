@@ -16,3 +16,12 @@ body {
 .navbar-nav > li > a {
 	padding-top: 21px;
 }
+
+
+/* Player */
+
+.player {
+   display: inline-block;
+   width: 100%;
+   padding: 5px;
+}

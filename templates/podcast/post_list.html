@@ -1,0 +1,19 @@
+{% extends 'pages/base.html' %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-xs-12 col-md-8">
+		{% for episode in episodes %}
+		<div class="post">
+			<h1><a href="#">{{ episode.title }}</a></h1>
+			<h2><small>{{ episode.date_broadcast|date:'d F, Y' }}</small></h2>
+			{{ episode.body|safe }}
+			<hr />
+		</div>
+		{% endfor %}
+	</div>
+	<div class="col-xs-12 col-md-4">
+	</div>
+
+{% endblock %}

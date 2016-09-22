@@ -6,10 +6,12 @@ import datetime
 from mutagen.mp3 import MP3
 import os
 from django.conf import settings
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
-def episode_list(request):
-	episodes = Episode.objects.exclude(file=None)
+
+def post_list(request):
+	episodes = Episode.objects.filter(file='').order_by('-date_broadcast')
 	paginator = Paginator(episodes, 10)
 
 	page = request.GET.get('page')
@@ -20,6 +22,24 @@ def episode_list(request):
 		episodes = paginator.page(1)
 	except EmptyPage:
 		episodes = paginator.page(paginator.num_pages)
+
+	return render(request, 'podcast/post_list.html', {'episodes': episodes})
+
+
+
+
+def episode_list(request):
+	episodes = Episode.objects.exclude(file='').order_by('-date_broadcast')
+	#paginator = Paginator(episodes, 10)
+
+	#page = request.GET.get('page')
+	
+	#try:
+	#	episodes = paginator.page(page)
+	#except PageNotAnInteger:
+	#	episodes = paginator.page(1)
+	#except EmptyPage:
+	#	episodes = paginator.page(paginator.num_pages)
 
 	return render(request, 'podcast/episode_list.html', {'episodes': episodes})
 

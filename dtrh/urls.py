@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from filebrowser.sites import site
+from podcast import views
 
 urlpatterns = [
     url(r'^admin/filebrowser/', include(site.urls)),
@@ -26,6 +27,7 @@ urlpatterns = [
     url(r'^episodes/', include('podcast.urls')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'', include('pages.urls')),
+    url(r'^blog/$', views.post_list, name='post_list'),
 ]
 
 if settings.DEBUG:

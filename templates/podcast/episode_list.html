@@ -2,8 +2,27 @@
 
 {% block content %}
 
-{% for episode in episode_list %}
-{{ episode }}
-{% endfor %}
+<div class="row episode_list">
+	{% for episode in episodes %}
+	<div class="col-xs-12 col-md-3 episode_card">
+		<div class="episode">
+			<h3><a href="{% url 'episode' episode.date_broadcast.year episode.date_broadcast.month episode.slug %}">{{ episode.title }}</a></h3>
+			<h4><small>{{ episode.date_broadcast|date:'d F, Y' }}</small></h4>
+			{{ episode.description }}
+			<hr />
+		</div>
+	</div>
+	
+	{% endfor %}
+</div>
+
+<script>
+
+$('.episode_list').masonry({
+	itemSelector: '.episode_card',
+});
+
+
+</script>
 
 {% endblock %}

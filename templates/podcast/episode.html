@@ -4,7 +4,7 @@
 
 {% load static %}
 
-<div class="col-xs-12 col-md-8">
+<div class="col-xs-12 col-md-8 col-md-offset-2">
 	<h1>{{ episode.title }}</h1>
 	<h4>Broadcast {{ episode.date_broadcast|date:'d F, Y' }}</h4>
 	<audio src="/media/{{ episode.file }}" preload="auto"></audio>

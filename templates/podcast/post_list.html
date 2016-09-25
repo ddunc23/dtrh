@@ -31,6 +31,13 @@
     		{% endif %}
 	</div>
 	<div class="col-xs-12 col-md-4">
+		<h3>Archive</h3>
+		{% regroup blog_post_list by date_broadcast|date:'Y' as posts_by_year %}
+		<ul class="list-unstyled">
+		{% for year in posts_by_year %}
+			<li><a href="{% url 'posts_by_year' year.grouper %}">{{ year.grouper }}</a></li>
+		{% endfor %}
+		</ul>
 	</div>
 </div>
 

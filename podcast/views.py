@@ -25,10 +25,28 @@ def post_list(request):
 
 	return render(request, 'podcast/post_list.html', {'episodes': episodes})
 
+
 def post(request, year, month, slug):
 	post = get_object_or_404(Episode, slug=slug, date_broadcast__year=year, date_broadcast__month=month)
 
 	return render(request, 'podcast/post.html', {'post': post})	
+
+
+def posts_by_year(request, year):
+	episodes = Episode.objects.filter(file='', date_broadcast__lte=datetime.date.today(), date_broadcast__year=year).order_by('-date_broadcast')
+	paginator = Paginator(episodes, 10)
+
+	page = request.GET.get('page')
+	
+	try:
+		episodes = paginator.page(page)
+	except PageNotAnInteger:
+		episodes = paginator.page(1)
+	except EmptyPage:
+		episodes = paginator.page(paginator.num_pages)
+
+	return render(request, 'podcast/post_list.html', {'episodes': episodes})
+
 
 
 def episode_list(request):

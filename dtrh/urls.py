@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'', include('pages.urls')),
     url(r'^blog/$', views.post_list, name='post_list'),
     url(r'^blog/(?P<year>\d+)/(?P<month>\d+)/(?P<slug>[-\w]+)/$', views.post, name='post'),
+    url(r'^blog/archive/(?P<year>\d+)$', views.posts_by_year, name='posts_by_year'),
 ]
 
 if settings.DEBUG:

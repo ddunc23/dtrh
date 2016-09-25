@@ -1,0 +1,16 @@
+{% extends 'pages/base.html' %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-xs-12 col-md-8">
+		<div class="post">
+			<h1>{{ post.title }}</h1>
+			<h2><small>{{ post.date_broadcast|date:'d F, Y' }}</small></h2>
+			{{ post.body|safe }}
+			<hr />
+		</div>
+	</div>
+</div>
+
+{% endblock %}

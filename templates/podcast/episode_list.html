@@ -6,6 +6,12 @@
 	{% for episode in episodes %}
 	<div class="col-xs-12 col-md-3 episode_card">
 		<div class="episode">
+			{% if episode.thumbnail %}
+				<img src="/media/{{ episode.thumbnail }}" style="width: 100%;" alt="Episode Thumbnail" />
+			{% else %}
+				{% load static %}
+				<img src="{% static 'dtrh/img/dtrh_logo.jpg' %}" style="width: 100%;" alt="Episode Thumbnail" />
+			{% endif %}
 			<h3><a href="{% url 'episode' episode.date_broadcast.year episode.date_broadcast.month episode.slug %}">{{ episode.title }}</a></h3>
 			<h4><small>{{ episode.date_broadcast|date:'d F, Y' }}</small></h4>
 			{{ episode.description }}

@@ -7,7 +7,7 @@
 		{% for episode in episodes %}
 		<div class="post">
 			<h1><a href="{% url 'post' episode.date_broadcast.year episode.date_broadcast.month episode.slug %}">{{ episode.title }}</a></h1>
-			<h2><small>{{ episode.date_broadcast|date:'d F, Y' }}</small></h2>
+			<h2><small>{% if episode.author %}By {{ episode.author.get_full_name }} | {% endif %}{{ episode.date_broadcast|date:'d F, Y' }}</small></h2>
 			{{ episode.body|safe }}
 			<hr />
 		</div>

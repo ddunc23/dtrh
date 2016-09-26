@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'taggit',
     'podcast',
     'pages',
+    'analytical'
 ]
 
 MIDDLEWARE = [
@@ -123,6 +124,8 @@ MEDIA_URL = '/media/'
 LOG_DIR = BASE_DIR.child('logs')
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
+
+GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-84809713-1'
 
 LOGGING = {
     'version': 1,

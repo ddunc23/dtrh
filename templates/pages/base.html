@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		{% load analytical %}
+		{% analytical_head_top %}
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,16 +29,20 @@
 		<!-- Custom styles -->
 		<link rel="stylesheet" href="{% static 'dtrh/css/styles.css' %}">
 		<link href="https://fonts.googleapis.com/css?family=Noto+Serif" rel="stylesheet"> 
-		</head>
-
+		
 		<!-- Audiojs -->
 		<script src="{% static '/audiojs/audio.min.js' %}"></script>
 
 		<!-- Masonry -->
 		<script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
 
-	<body>
+		{% analytical_head_bottom %}
+		</head>
 
+
+
+	<body>
+	{% analytical_body_top %}
 			<nav class="navbar navbar-default">
 				<div class="container-fluid">
 					<div class="navbar-header">
@@ -104,5 +110,6 @@
 		  return t;
 		}(document, "script", "twitter-wjs"));
 		</script>
+	{% analytical_body_bottom %}
 	</body>
 </html>

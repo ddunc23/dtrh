@@ -11,7 +11,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def post_list(request):
-	episodes = Episode.objects.filter(file='', date_broadcast__lte=datetime.date.today()).order_by('-date_broadcast')
+	episodes = Episode.objects.filter(file='', date_broadcast__date__lte=datetime.date.today()).order_by('-date_broadcast')
 	paginator = Paginator(episodes, 10)
 
 	page = request.GET.get('page')

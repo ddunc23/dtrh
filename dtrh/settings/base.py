@@ -127,6 +127,8 @@ CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-84809713-1'
 
+FILEBROWSER_MAX_UPLOAD_SIZE = 52428800
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

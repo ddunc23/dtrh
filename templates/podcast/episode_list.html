@@ -24,10 +24,11 @@
 
 <script>
 
-$('.episode_list').masonry({
-	itemSelector: '.episode_card',
+var $grid = $('.episode_list').imagesLoaded(function() {
+	$grid.masonry({
+		itemSelector: '.episode_card',
+	});
 });
-
 
 </script>
 

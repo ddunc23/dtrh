@@ -5,10 +5,11 @@
 {% load static %}
 
 <div class="col-xs-12 col-md-8 col-md-offset-2">
-	<h1>{{ episode.title }}</h1>
-	<h4>Broadcast {{ episode.date_broadcast|date:'d F, Y' }}</h4>
-	<br />
-	<img src="{% static 'dtrh/img/dtrh_logo.jpg' %}" style="width: 80px; float: left;" alt="Episode Thumbnail" /><audio src="/media/{{ episode.file }}" preload="auto"></audio>
+	<img src="/media/{{ episode.thumbnail }}" alt="Episode Thumbnail" style="width:100%; height: auto;" class="img-rounded" />
+		<h1>{{ episode.title }}</h1>
+		<h4>Broadcast {{ episode.date_broadcast|date:'d F, Y' }}</h4>
+		<br />
+		<img src="{% static 'dtrh/img/dtrh_logo.jpg' %}" style="width: 80px; float: left;" alt="DTRH logo" /><audio src="/media/{{ episode.file }}" preload="auto"></audio>
 	<br />
 	<hr />
 	<p>{{ episode.description }}</p>
